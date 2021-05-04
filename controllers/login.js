@@ -48,7 +48,6 @@ login.login = async (ctx, next) => {
 }
 login.adminLogin = async (ctx, next) => {
   const adminInfo = ctx.request.body
-  console.log(adminInfo)
   const username = adminInfo.username
   const info = await Admin.findAll({
     raw: true,
@@ -76,6 +75,7 @@ login.adminLogin = async (ctx, next) => {
 login.userLogin = async (ctx, next) => {
   const userInfo = ctx.request.body
   const username = userInfo.username
+  console.log(userInfo)
   const info = await User.findAll({
     // 回答row: true怎么不sgm?
     // raw: true,
@@ -83,28 +83,12 @@ login.userLogin = async (ctx, next) => {
       [Op.and]: [{ user_name: [userInfo.value.username] }, { password: [userInfo.value.password] }],
     },
   })
-
   const borrow = await Borrow.findAll({
     // raw: true,
     where: {
       user_certificate: [info[0].user_certificate],
     },
   })
-
-  /*   const isbn = []
-  borrow.map((item) => {
-    isbn.push(item.book_isbn)
-  })
-  const bookName = await Book.findAll({
-    raw: true,
-    attributes: ['book_name'],
-    where: {
-      book_isbn: {
-        [Op.or]: isbn,
-      },
-    },
-  }) */
-
   if (info.length) {
     ctx.body = {
       token: jwt.sign({ username }, config.secret),

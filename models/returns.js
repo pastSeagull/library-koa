@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize')
 const db = require('../lib/db')
 
 const Rerurn = db.define(
-  'return',
+  'returns',
   {
     return_id: {
       type: Sequelize.INTEGER,

@@ -6,44 +6,48 @@ const jwtMiddleware = require('../middlewares/jwt')
 
 const router = new Router()
 router.prefix('/api/v1')
-// router.use(jwtMiddleware)
+// 请求带 token
+router.use(jwtMiddleware)
 
 router.get('/query', controllers.query.findSomething)
 
-router.get('/findAll', controllers.crud.searchBook)
-
 router.post('/search', controllers.crud.search)
 // borrow
-router.get('/borrow', controllers.crud.borrowText)
-router.post('/borrowAdd', controllers.crud.borrowAdd)
-router.post('/borrowUpdate', controllers.crud.borrowUpdate)
-router.post('/borrowRenew', controllers.crud.borrowRenew)
+router.get('/borrow', controllers.borrow.borrowAll)
+router.post('/borrowAdd', controllers.borrow.borrowAdd)
+router.post('/borrowUpdate', controllers.borrow.borrowUpdate)
+router.get('/borrowRenew', controllers.borrow.borrowRenew)
+// 前台请求
+router.post('/getBorrow', controllers.borrow.getBorrow)
 
 // Book
-router.post('/addBook', controllers.crud.addBook)
-router.get('/deleteBook', controllers.crud.deleteBook)
-router.post('/updateBook', controllers.crud.updateBook)
+router.get('/findAll', controllers.book.searchBook)
+router.post('/addBook', controllers.book.addBook)
+router.get('/deleteBook', controllers.book.deleteBook)
+router.post('/updateBook', controllers.book.updateBook)
 
 // User
-router.get('/userAll', controllers.crud.userAll)
-router.post('/useradd', controllers.crud.userAdd)
-router.get('/userDel', controllers.crud.userDel)
-router.post('/userUpdate', controllers.crud.userUpdate)
+router.get('/userAll', controllers.user.userAll)
+router.post('/useradd', controllers.user.userAdd)
+router.get('/userDel', controllers.user.userDel)
+router.post('/userUpdate', controllers.user.userUpdate)
 
 // classify
-router.get('/tagcolAll', controllers.crud.tagcolAll)
-router.post('/tagcolAdd', controllers.crud.tagcolAdd)
-router.post('/tagcolupdata', controllers.crud.tagcolupdata)
-router.get('/tagcolDel', controllers.crud.tagcolDel)
+router.get('/tagcolAll', controllers.tagcol.tagcolAll)
+router.post('/tagcolAdd', controllers.tagcol.tagcolAdd)
+router.post('/tagcolupdata', controllers.tagcol.tagcolupdata)
+router.get('/tagcolDel', controllers.tagcol.tagcolDel)
 
 // admin
-router.get('/adminAll', controllers.crud.adminAll)
-router.post('/adminAdd', controllers.crud.adminAdd)
-router.post('/adminUpdate', controllers.crud.adminUpdate)
-router.get('/adminDel', controllers.crud.adminDel)
+router.get('/adminAll', controllers.admin.adminAll)
+router.post('/adminAdd', controllers.admin.adminAdd)
+router.post('/adminUpdate', controllers.admin.adminUpdate)
+router.get('/adminDel', controllers.admin.adminDel)
 
 // return
-router.post('/returnAdd', controllers.crud.returnAdd)
-router.get('/returnAll', controllers.crud.returnAll)
-router.get('/borrowDel', controllers.crud.borrowDel)
+router.post('/returnAdd', controllers.returns.returnAdd)
+router.get('/returnAll', controllers.returns.returnAll)
+
+router.get('/borrowDel', controllers.borrow.borrowDel)
+
 module.exports = router
