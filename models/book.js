@@ -1,6 +1,5 @@
 'use strict'
 
-/* const { INTEGER } = require('sequelize/types') */
 const { Sequelize } = require('sequelize')
 const db = require('../lib/db')
 

@@ -9,8 +9,6 @@ router.prefix('/api/v1')
 // 请求带 token
 router.use(jwtMiddleware)
 
-router.get('/query', controllers.query.findSomething)
-
 router.post('/search', controllers.crud.search)
 // borrow
 router.get('/borrow', controllers.borrow.borrowAll)

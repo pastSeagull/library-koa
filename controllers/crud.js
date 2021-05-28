@@ -15,10 +15,4 @@ crud.search = async (ctx, next) => {
   })
   return next()
 }
-// 作用未知，准备删除
-crud.Text = async (ctx, next) => {
-  ctx.result = await Book.findAll()
-  return next()
-}
-
 module.exports = crud
