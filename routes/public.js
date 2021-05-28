@@ -12,9 +12,6 @@ router.post('/outLogin', controllers.login.outLogin)
 // admin
 router.post('/adminLogin', controllers.login.adminLogin)
 
-router.post('/hzyText', controllers.login.hzyText)
-router.post('/getUserInfo', controllers.login.getUserInfo)
-
 router.post('/userLogin', controllers.login.userLogin)
 
 module.exports = router
